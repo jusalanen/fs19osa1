@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
 
-const Button = (props) => (
+const Button = props => (
   <button onClick={props.onClick}>
     {props.text}
   </button>
 )
 
-const Statistic = props =>{
+const Statistic = props => {
   if (props.text === 'positive') {
     return <p>{props.text}: {props.value} %</p>
   } else {
@@ -16,7 +16,7 @@ const Statistic = props =>{
   } 
 }
 
-const Statistics = (props) => {
+const Statistics = props => {
   const all = props.good + props.neutral + props.bad
   const average = (props.good - props.bad) / all
   const positive = props.good * 100 / all

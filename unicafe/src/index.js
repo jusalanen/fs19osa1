@@ -8,12 +8,15 @@ const Button = props => (
   </button>
 )
 
-const Statistic = props => {
-  if (props.text === 'positive') {
-    return <p>{props.text}: {props.value} %</p>
-  } else {
-    return <p>{props.text}: {props.value}</p>
+const Statistic = ({ text, value }) => {
+  if (text === 'positive') {
+    return (
+      <tr><td width='70'>{text}: </td><td>{value} %</td></tr>
+    )
   } 
+  return (
+    <tr><td width='70'>{text}: </td><td>{value}</td></tr>
+  ) 
 }
 
 const Statistics = props => {
@@ -29,12 +32,14 @@ const Statistics = props => {
     return (
       <div>
         <h2>statistics</h2>
+        <div><table><tbody>
         <Statistic text = 'good' value = {props.good} />
         <Statistic text = 'neutral' value = {props.neutral} />
         <Statistic text = 'bad' value = {props.bad} />
         <Statistic text = 'all' value = {all} />
         <Statistic text = 'average' value = {average} />
         <Statistic text = 'positive' value = {positive} />
+        </tbody></table></div>       
       </div>
     )
   } 

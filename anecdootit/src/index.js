@@ -9,24 +9,39 @@ const Button = props => (
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
-  const [points, setPoints] = useState(Array(6).fill(0))
+  const [votes, setVotes] = useState(Array(6).fill(0))
 
   const setRandom = () => setSelected(Math.floor(Math.random() * 6))
 
   const vote = () => {
-    const copy = [...points]
+    const copy = [...votes]
     copy[selected] += 1
-    setPoints(copy)
-    console.log(points)
+    setVotes(copy)
+    console.log(votes) // setVotes ei ehdi mukaan tähän tulostukseen
+    topVotes()
+  }
+
+  const topVotes = () => {
+    let top = 0
+    for (let i = 0; i < 6; i++) {
+      if (votes[i] > votes[top]) {
+        top = i
+      }
+    }
+    console.log('top =' ,top)
+    return top
   }
 
   return (
     <div>
-      <h2>Anecdotes</h2>
+      <h1>Anecdotes</h1>
       {props.anecdotes[selected]}<br></br>
-      <p>Has {points[selected]} points</p>
+      has {votes[selected]} votes<br></br>
       <Button onClick={() => vote()} text = 'vote'/>
       <Button onClick={() => setRandom()} text= 'next anecdote'/><br></br>
+      <h2>Anecdote with most votes</h2>
+      {props.anecdotes[topVotes()]}<br></br>
+      has {votes[topVotes()]} votes
     </div>
   )
 }
